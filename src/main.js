@@ -520,116 +520,772 @@ pdfButton.addEventListener(
 
 async function createPdf() {
 
-  if (!currentWallet) {
-    return;
-  }
+  if (!currentWallet) return;
 
   pdfButton.disabled = true;
-  pdfButton.textContent =
-    "Creating PDF...";
+  pdfButton.textContent = "Preparing Your Feelcoin Paper Wallet...";
 
   try {
 
-    const doc =
-      new jsPDF({
-        orientation: "portrait",
-        unit: "mm",
-        format: "a4"
+    const doc = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
+      compress: true
+    });
+
+    const W = 210;
+    const H = 297;
+
+
+    async function loadImage(url, mime = "image/png", quality = 0.95) {
+
+      const img = await new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = url;
       });
 
-    const width =
-      doc.internal.pageSize.getWidth();
+      let w = img.naturalWidth;
+      let h = img.naturalHeight;
 
-    const margin = 18;
+      if (w > 4000) {
+        const scale = 4000 / w;
+        w = Math.round(w * scale);
+        h = Math.round(h * scale);
+      }
 
-    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
 
-      const logo =
-        await imageToDataUrl(
-          "/feelcoin-logo.jpeg"
-        );
+      const ctx = canvas.getContext("2d");
+
+      ctx.drawImage(img, 0, 0, w, h);
+
+      return {
+        data: canvas.toDataURL(mime, quality),
+        width: w,
+        height: h
+      };
+    }
+
+
+    function coverImage(image, x, y, w, h, format = "JPEG") {
+
+      const ir = image.width / image.height;
+      const br = w / h;
+
+      let dw, dh, dx, dy;
+
+      if (ir > br) {
+        dh = h;
+        dw = h * ir;
+        dx = x - (dw - w) / 2;
+        dy = y;
+      } else {
+        dw = w;
+        dh = w / ir;
+        dx = x;
+        dy = y - (dh - h) / 2;
+      }
 
       doc.addImage(
-        logo,
-        "PNG",
-        width / 2 - 17,
-        12,
-        34,
-        34
+        image.data,
+        format,
+        dx,
+        dy,
+        dw,
+        dh,
+        undefined,
+        "FAST"
       );
-
-    } catch (error) {
-
-      console.warn(
-        "PDF logo unavailable",
-        error
-      );
-
     }
+
+
+    const community = await loadImage(
+      "/assets/feelcoin-community.webp",
+      "image/jpeg",
+      0.92
+    );
+
+    const banknote = await loadImage(
+      "/assets/feelcoin-banknote-big.png",
+      "image/png"
+    );
+
+    const coin = await loadImage(
+      "/assets/feelcoin-coin.webp",
+      "image/png"
+    );
+
+
+    /* =====================================================
+       FULL PAGE BACKGROUND
+       ===================================================== */
+
+    /*
+     * COMMUNITY BACKGROUND
+     * Show the entire artwork instead of heavily cropping it.
+     */
+
+    /*
+     * COMMUNITY BACKGROUND
+     * Fill the page with a subtle enlarged copy first,
+     * then place the full zoomed-out artwork on top.
+     */
+
+    doc.setFillColor(4, 11, 18);
+    doc.rect(0, 0, W, H, "F");
+
+    /* soft full-page artwork behind the main image */
+    const coverScale =
+      Math.max(
+        W / community.width,
+        H / community.height
+      );
+
+    const coverW =
+      community.width * coverScale;
+
+    const coverH =
+      community.height * coverScale;
+
+    const coverX =
+      (W - coverW) / 2;
+
+    const coverY =
+      (H - coverH) / 2;
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 0.42
+      })
+    );
+
+    doc.addImage(
+      community.data,
+      "JPEG",
+      coverX,
+      coverY,
+      coverW,
+      coverH,
+      undefined,
+      "FAST"
+    );
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 1
+      })
+    );
+
+    /* main artwork: still zoomed out so most of it stays visible */
+    const communityScale =
+      Math.min(
+        (W - 8) / community.width,
+        (H - 8) / community.height
+      );
+
+    const communityW =
+      community.width * communityScale;
+
+    const communityH =
+      community.height * communityScale;
+
+    const communityX =
+      (W - communityW) / 2;
+
+    const communityY =
+      (H - communityH) / 2;
+
+    doc.addImage(
+      community.data,
+      "JPEG",
+      communityX,
+      communityY,
+      communityW,
+      communityH,
+      undefined,
+      "FAST"
+    );
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 0.48
+      })
+    );
+
+    doc.setFillColor(4, 11, 18);
+
+    doc.rect(
+      0,
+      0,
+      W,
+      H,
+      "F"
+    );
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 1
+      })
+    );
+
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
+    doc.addImage(
+      coin.data,
+      "PNG",
+      14,
+      12,
+      25,
+      25
+    );
+
+    doc.setTextColor(
+      238,
+      207,
+      143
+    );
+
+    doc.setFont(
+      "times",
+      "bold"
+    );
+
+    doc.setFontSize(25);
+
+    doc.text(
+      "FEELCOIN",
+      46,
+      23
+    );
+
+    doc.setFontSize(11);
 
     doc.setFont(
       "helvetica",
       "bold"
     );
 
-    doc.setFontSize(23);
-
     doc.text(
-      "FEELCOIN",
-      width / 2,
-      55,
-      {
-        align: "center"
-      }
+      "OFFICIAL PAPER WALLET",
+      46,
+      31
     );
 
     doc.setFont(
-      "helvetica",
-      "normal"
-    );
-
-    doc.setFontSize(15);
-
-    doc.text(
-      "Paper Wallet",
-      width / 2,
-      64,
-      {
-        align: "center"
-      }
+      "times",
+      "italic"
     );
 
     doc.setFontSize(9);
 
     doc.text(
       "In Feels We Trust",
-      width / 2,
-      71,
+      196,
+      23,
       {
-        align: "center"
+        align: "right"
       }
     );
 
-    doc.line(
-      margin,
-      78,
-      width - margin,
-      78
+
+    /* serial */
+
+    const serial =
+      "FC-" +
+      currentWallet.address
+        .slice(1, 13)
+        .toUpperCase()
+        .match(/.{1,4}/g)
+        .join("-");
+
+    doc.setFont(
+      "courier",
+      "bold"
     );
 
-    let y = 88;
+    doc.setFontSize(7);
+
+    doc.text(
+      serial,
+      196,
+      31,
+      {
+        align: "right"
+      }
+    );
+
+
+    /* thin separator */
+
+    doc.setDrawColor(
+      194,
+      151,
+      73
+    );
+
+    doc.setLineWidth(0.4);
+
+    doc.line(
+      14,
+      42,
+      196,
+      42
+    );
+
+
+    /* =====================================================
+       MAIN BANKNOTE
+       ===================================================== */
+
+    const noteX = 15;
+    const noteY = 49;
+    const noteW = 180;
+
+    const noteH =
+      noteW *
+      banknote.height /
+      banknote.width;
+
+
+    /*
+     * Create a genuinely transparent version of the ORIGINAL
+     * banknote artwork.
+     *
+     * No recoloring.
+     * No cream wash.
+     * No crop.
+     */
+
+    const originalBanknoteImage =
+      await new Promise((resolve, reject) => {
+
+        const img = new Image();
+
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+
+        img.src =
+          "/assets/feelcoin-banknote-big.png";
+      });
+
+
+    const fadedCanvas =
+      document.createElement("canvas");
+
+    fadedCanvas.width =
+      originalBanknoteImage.naturalWidth;
+
+    fadedCanvas.height =
+      originalBanknoteImage.naturalHeight;
+
+
+    const fadedCtx =
+      fadedCanvas.getContext("2d");
+
+
+    fadedCtx.clearRect(
+      0,
+      0,
+      fadedCanvas.width,
+      fadedCanvas.height
+    );
+
+
+    /*
+     * Only transparency is changed.
+     * Increase 0.52 if you want the banknote stronger.
+     */
+    fadedCtx.globalAlpha = 0.52;
+
+    fadedCtx.drawImage(
+      originalBanknoteImage,
+      0,
+      0
+    );
+
+
+    fadedCtx.globalAlpha = 1;
+
+
+    const fadedBanknote =
+      fadedCanvas.toDataURL(
+        "image/png"
+      );
+
+
+    doc.addImage(
+      fadedBanknote,
+      "PNG",
+      noteX,
+      noteY,
+      noteW,
+      noteH,
+      undefined,
+      "FAST"
+    );
+
+
+    doc.setDrawColor(
+      205,
+      166,
+      92
+    );
+
+    doc.setLineWidth(0.55);
+
+    doc.roundedRect(
+      noteX,
+      noteY,
+      noteW,
+      noteH,
+      2,
+      2
+    );
+
+
+    /* =====================================================
+       PUBLIC WALLET AREA ON BANKNOTE
+       ===================================================== */
+
+    const publicY =
+      noteY +
+      noteH -
+      35;
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 0.84
+      })
+    );
+
+    doc.setFillColor(
+      249,
+      239,
+      215
+    );
+
+    doc.roundedRect(
+      21,
+      publicY,
+      122,
+      27,
+      2,
+      2,
+      "F"
+    );
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 1
+      })
+    );
+
+    doc.setTextColor(
+      105,
+      73,
+      28
+    );
 
     doc.setFont(
       "helvetica",
       "bold"
     );
 
-    doc.setFontSize(9);
+    doc.setFontSize(6.7);
 
     doc.text(
-      "PUBLIC ADDRESS",
-      margin,
-      y
+      "PUBLIC FEELCOIN ADDRESS",
+      26,
+      publicY + 7
+    );
+
+    doc.setTextColor(
+      18,
+      34,
+      48
+    );
+
+    doc.setFont(
+      "courier",
+      "bold"
+    );
+
+    doc.setFontSize(7);
+
+    const addressLines =
+      doc.splitTextToSize(
+        currentWallet.address,
+        110
+      );
+
+    doc.text(
+      addressLines,
+      26,
+      publicY + 14
+    );
+
+
+    /* =====================================================
+       QR CODE
+       ===================================================== */
+
+    const qr = await QRCode.toDataURL(
+      currentWallet.address,
+      {
+        width: 1000,
+        margin: 1,
+        errorCorrectionLevel: "M"
+      }
+    );
+
+    doc.setFillColor(
+      255,
+      255,
+      255
+    );
+
+    doc.roundedRect(
+      151,
+      publicY - 3,
+      36,
+      36,
+      2,
+      2,
+      "F"
+    );
+
+    doc.addImage(
+      qr,
+      "PNG",
+      154,
+      publicY,
+      30,
+      30
+    );
+
+
+    /* =====================================================
+       PRIVATE SECTION
+       ===================================================== */
+
+    const panelY =
+      noteY +
+      noteH +
+      10;
+
+    const panelH = 102;
+
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 0.92
+      })
+    );
+
+    doc.setFillColor(
+      248,
+      238,
+      213
+    );
+
+    doc.roundedRect(
+      15,
+      panelY,
+      180,
+      panelH,
+      3,
+      3,
+      "F"
+    );
+
+    doc.setGState(
+      new doc.GState({
+        opacity: 1
+      })
+    );
+
+
+    doc.setDrawColor(
+      177,
+      132,
+      55
+    );
+
+    doc.setLineWidth(0.45);
+
+    doc.roundedRect(
+      15,
+      panelY,
+      180,
+      panelH,
+      3,
+      3
+    );
+
+
+    /* Private title */
+
+    doc.setFillColor(
+      13,
+      29,
+      44
+    );
+
+    doc.roundedRect(
+      20,
+      panelY + 6,
+      66,
+      12,
+      2,
+      2,
+      "F"
+    );
+
+    doc.setTextColor(
+      237,
+      204,
+      136
+    );
+
+    doc.setFont(
+      "helvetica",
+      "bold"
+    );
+
+    doc.setFontSize(8);
+
+    doc.text(
+      "PRIVATE RECOVERY DATA",
+      53,
+      panelY + 14,
+      {
+        align: "center"
+      }
+    );
+
+
+    /* warning */
+
+    doc.setTextColor(
+      119,
+      74,
+      43
+    );
+
+    doc.setFontSize(6.5);
+
+    doc.text(
+      "KEEP OFFLINE • NEVER SHARE • STORE SECURELY",
+      189,
+      panelY + 14,
+      {
+        align: "right"
+      }
+    );
+
+
+    /* =====================================================
+       SEED
+       ===================================================== */
+
+    doc.setTextColor(
+      108,
+      75,
+      29
+    );
+
+    doc.setFont(
+      "helvetica",
+      "bold"
+    );
+
+    doc.setFontSize(7);
+
+    doc.text(
+      "RECOVERY SEED",
+      22,
+      panelY + 29
+    );
+
+    doc.setTextColor(
+      19,
+      34,
+      50
+    );
+
+    doc.setFont(
+      "times",
+      "bold"
+    );
+
+    doc.setFontSize(8.2);
+
+    const seedLines =
+      doc.splitTextToSize(
+        currentWallet.seed,
+        164
+      );
+
+    doc.text(
+      seedLines,
+      22,
+      panelY + 38
+    );
+
+
+    /* separator */
+
+    doc.setDrawColor(
+      187,
+      148,
+      79
+    );
+
+    doc.setLineWidth(0.25);
+
+    doc.line(
+      22,
+      panelY + 59,
+      188,
+      panelY + 59
+    );
+
+
+    /* =====================================================
+       PRIVATE SPEND KEY
+       ===================================================== */
+
+    doc.setTextColor(
+      108,
+      75,
+      29
+    );
+
+    doc.setFont(
+      "helvetica",
+      "bold"
+    );
+
+    doc.setFontSize(6.6);
+
+    doc.text(
+      "PRIVATE SPEND KEY",
+      22,
+      panelY + 69
+    );
+
+    doc.setTextColor(
+      19,
+      34,
+      50
     );
 
     doc.setFont(
@@ -637,138 +1293,128 @@ async function createPdf() {
       "normal"
     );
 
-    doc.setFontSize(7.5);
+    doc.setFontSize(6.3);
 
-    const addressLines =
+    const spendLines =
       doc.splitTextToSize(
-        currentWallet.address,
-        115
+        currentWallet.spendKey,
+        75
       );
 
     doc.text(
-      addressLines,
-      margin,
-      y + 7
+      spendLines,
+      22,
+      panelY + 77
     );
 
-    const qr =
-      await QRCode.toDataURL(
-        currentWallet.address,
-        {
-          width: 500,
-          margin: 1
-        }
-      );
 
-    doc.addImage(
-      qr,
-      "PNG",
-      150,
-      83,
-      40,
-      40
+    /* =====================================================
+       PRIVATE VIEW KEY
+       ===================================================== */
+
+    doc.setTextColor(
+      108,
+      75,
+      29
     );
-
-    y = 133;
-
-    doc.line(
-      margin,
-      y,
-      width - margin,
-      y
-    );
-
-    y += 11;
-
-    y = addPdfSection(
-      doc,
-      "RECOVERY SEED",
-      currentWallet.seed,
-      y,
-      width,
-      margin
-    );
-
-    y = addPdfSection(
-      doc,
-      "PRIVATE SPEND KEY",
-      currentWallet.spendKey,
-      y,
-      width,
-      margin
-    );
-
-    y = addPdfSection(
-      doc,
-      "PRIVATE VIEW KEY",
-      currentWallet.viewKey,
-      y,
-      width,
-      margin
-    );
-
-    doc.line(
-      margin,
-      y,
-      width - margin,
-      y
-    );
-
-    y += 10;
 
     doc.setFont(
       "helvetica",
       "bold"
     );
 
-    doc.setFontSize(9);
+    doc.setFontSize(6.6);
 
     doc.text(
-      "SECURITY WARNING",
-      margin,
-      y
+      "PRIVATE VIEW KEY",
+      110,
+      panelY + 69
     );
 
-    y += 7;
+    doc.setTextColor(
+      19,
+      34,
+      50
+    );
+
+    doc.setFont(
+      "courier",
+      "normal"
+    );
+
+    doc.setFontSize(6.3);
+
+    const viewLines =
+      doc.splitTextToSize(
+        currentWallet.viewKey,
+        75
+      );
+
+    doc.text(
+      viewLines,
+      110,
+      panelY + 77
+    );
+
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    doc.setDrawColor(
+      194,
+      151,
+      73
+    );
+
+    doc.line(
+      14,
+      277,
+      196,
+      277
+    );
+
+    doc.setTextColor(
+      224,
+      192,
+      128
+    );
+
+    doc.setFont(
+      "times",
+      "italic"
+    );
+
+    doc.setFontSize(8);
+
+    doc.text(
+      "Feelcoin • In Feels We Trust",
+      14,
+      285
+    );
 
     doc.setFont(
       "helvetica",
       "normal"
     );
 
-    doc.setFontSize(8);
-
-    const warning =
-      doc.splitTextToSize(
-        "Keep this document private. Anyone with the recovery seed or private spend key can control the funds stored in this wallet.",
-        width - margin * 2
-      );
+    doc.setFontSize(5.6);
 
     doc.text(
-      warning,
-      margin,
-      y
-    );
-
-    doc.setFontSize(8);
-
-    doc.text(
-      "Feelcoin — In Feels We Trust",
-      width / 2,
-      286,
+      "Anyone with the recovery seed or private spend key can control this wallet.",
+      196,
+      285,
       {
-        align: "center"
+        align: "right"
       }
     );
 
-    const shortAddress =
-      currentWallet.address.slice(
-        0,
-        8
-      );
+
+    const short =
+      currentWallet.address.slice(0, 8);
 
     doc.save(
-      `Feelcoin-Paper-Wallet-${shortAddress}.pdf`
+      `Feelcoin-Paper-Wallet-${short}.pdf`
     );
 
   } catch (error) {
@@ -776,7 +1422,7 @@ async function createPdf() {
     console.error(error);
 
     alert(
-      "PDF generation failed:\n\n" +
+      "Unable to create PDF:\n\n" +
       error.message
     );
 
@@ -786,7 +1432,9 @@ async function createPdf() {
 
     pdfButton.textContent =
       "Download PDF";
+
   }
+
 }
 
 

@@ -3,27 +3,81 @@
 }
 
 :root {
+  --ink: #f8edd0;
+  --gold: #d8ad58;
+  --gold-light: #ffe6a1;
+  --gold-deep: #8b5c1e;
+  --navy: #07111d;
+  --navy-2: #0a1827;
+  --paper: #f1dfb6;
+  --paper-dark: #caa96b;
+
   font-family:
     Inter,
+    "Segoe UI",
     Arial,
     Helvetica,
     sans-serif;
 
-  color: #eef1ff;
-  background: #070b15;
+  color: var(--ink);
+  background: #02070d;
+}
+
+html {
+  min-height: 100%;
+  background: #02070d;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 7, 13, .24),
+      rgba(2, 7, 13, .93)
+    ),
+    url("/assets/feelcoin-community.webp")
+    center top / cover fixed no-repeat;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
 
   background:
     radial-gradient(
-      circle at top,
-      #27335c 0%,
-      #11172c 33%,
-      #080c18 70%,
-      #050811 100%
+      circle at 50% 5%,
+      rgba(255, 203, 105, .12),
+      transparent 35%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(4, 12, 20, .85),
+      rgba(4, 12, 20, .20) 50%,
+      rgba(4, 12, 20, .85)
+    );
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  opacity: .20;
+
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255,255,255,.012) 4px
     );
 }
 
@@ -32,265 +86,455 @@ button {
 }
 
 .page {
-  width: min(
-    1160px,
-    calc(100% - 32px)
-  );
-
+  width: min(1320px, calc(100% - 36px));
   margin: 0 auto;
-
-  padding:
-    44px 0
-    55px;
+  padding: 48px 0 62px;
 }
 
-.hero {
-  text-align: center;
+/* ======================================================
+   HERO
+   ====================================================== */
 
-  margin-bottom: 28px;
+.hero {
+  position: relative;
+  min-height: 410px;
+  padding: 44px 24px 52px;
+  margin-bottom: 34px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  text-align: center;
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(223, 178, 86, .30);
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 9, 15, .08) 0%,
+      rgba(3, 9, 15, .30) 45%,
+      rgba(3, 9, 15, .93) 100%
+    ),
+    url("/assets/feelcoin-community.webp")
+    center 42% / cover no-repeat;
+
+  box-shadow:
+    0 35px 110px rgba(0,0,0,.70),
+    inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255, 213, 124, .10),
+      transparent 38%
+    );
+}
+
+.hero::after {
+  content: "FEELCOIN  •  IN FEELS WE TRUST  •  FEELCOIN  •  IN FEELS WE TRUST";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(241, 207, 135, .33);
+  border-top: 1px solid rgba(216,173,88,.16);
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  white-space: nowrap;
 }
 
 .logo {
-  width: 118px;
-  height: 118px;
+  position: relative;
+  z-index: 2;
+
+  width: 112px;
+  height: 112px;
 
   object-fit: cover;
-
   border-radius: 50%;
 
-  box-shadow:
-    0 0 0 1px
-      rgba(
-        255,
-        255,
-        255,
-        .08
-      ),
-    0 15px 45px
-      rgba(
-        0,
-        0,
-        0,
-        .38
-      );
+  content: url("/assets/feelcoin-coin.webp");
+
+  filter:
+    drop-shadow(0 15px 24px rgba(0,0,0,.60))
+    drop-shadow(0 0 18px rgba(219,175,81,.18));
+
+  animation: sealFloat 5s ease-in-out infinite;
+}
+
+@keyframes sealFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
 }
 
 .hero h1 {
-  margin:
-    16px 0
-    5px;
+  position: relative;
+  z-index: 2;
 
-  font-size: 40px;
-  letter-spacing: -.6px;
+  margin: 18px 0 4px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  color: #fff1cb;
+
+  text-shadow:
+    0 2px 0 rgba(89,49,6,.9),
+    0 12px 35px rgba(0,0,0,.9);
 }
 
 .tagline {
+  position: relative;
+  z-index: 2;
+
   margin: 0;
 
-  color: #adb6d8;
+  color: #e4bd69;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
   font-size: 17px;
+  font-style: italic;
+  letter-spacing: 3px;
 }
 
 .notice {
-  max-width: 790px;
+  position: relative;
+  z-index: 2;
 
-  margin:
-    24px auto
-    0;
+  max-width: 760px;
 
-  padding:
-    14px 19px;
+  margin: 22px auto 0;
+  padding: 11px 18px;
 
-  line-height: 1.6;
-
-  color: #ccd3ed;
+  color: #e9dec5;
 
   border:
     1px solid
-    rgba(
-      141,
-      117,
-      255,
-      .28
-    );
+    rgba(218, 176, 89, .26);
 
-  border-radius: 14px;
+  border-radius: 999px;
 
   background:
-    rgba(
-      110,
-      85,
-      210,
-      .10
-    );
+    rgba(2, 9, 16, .66);
+
+  backdrop-filter: blur(12px);
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  box-shadow:
+    inset 0 0 20px rgba(224,177,82,.035);
 }
+
+
+/* ======================================================
+   BANKNOTE WALLET
+   ====================================================== */
 
 .wallet-card {
   position: relative;
+  isolation: isolate;
 
   overflow: hidden;
 
-  padding: 31px;
+  padding: 34px;
 
   border:
     1px solid
-    #27304c;
+    rgba(222, 177, 85, .68);
 
   border-radius: 28px;
 
+  color: #162234;
+
   background:
-    rgba(
-      10,
-      15,
-      29,
-      .96
-    );
+    linear-gradient(
+      90deg,
+      rgba(245, 228, 191, .95),
+      rgba(239, 218, 174, .88)
+    ),
+    url("/assets/feelcoin-banknote.webp")
+    center / cover no-repeat;
 
   box-shadow:
-    0 30px 90px
-    rgba(
-      0,
-      0,
-      0,
-      .42
+    0 38px 100px rgba(0,0,0,.72),
+    0 0 0 1px rgba(255,239,185,.15),
+    inset 0 0 80px rgba(92,55,14,.12);
+}
+
+.wallet-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(244,229,195,.94) 0%,
+      rgba(244,229,195,.89) 55%,
+      rgba(244,229,195,.80) 100%
     );
 }
+
+.wallet-card::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  z-index: 0;
+  pointer-events: none;
+
+  border:
+    1px solid
+    rgba(112,73,21,.38);
+
+  border-radius: 20px;
+
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,.10),
+    inset 0 0 0 6px rgba(118,72,18,.07);
+}
+
+/* Banknote artwork ghost */
 
 .watermark {
   position: absolute;
 
-  width: 620px;
+  width: 760px;
+  max-width: none;
 
-  right: -170px;
-  top: 30px;
+  top: -30px;
+  right: -165px;
 
-  opacity: .025;
+  opacity: .16;
 
   pointer-events: none;
+
+  content: url("/assets/feelcoin-banknote.webp");
+
+  mix-blend-mode: multiply;
+  filter:
+    sepia(.4)
+    contrast(1.1);
 }
+
+
+/* ======================================================
+   WALLET HEADER
+   ====================================================== */
 
 .wallet-top {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
-
-  justify-content:
-    space-between;
-
   align-items: center;
+  justify-content: space-between;
 
-  padding-bottom: 23px;
+  padding:
+    5px 5px
+    22px;
 
   border-bottom:
     1px solid
-    #202944;
+    rgba(90,58,16,.38);
 }
 
 .brand {
-  font-weight: 800;
-  font-size: 21px;
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  letter-spacing: 2px;
+  color: #192a40;
+
+  font-size: 29px;
+  font-weight: 900;
+
+  letter-spacing: 5px;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.7);
 }
 
 .subtitle {
-  margin-top: 3px;
+  margin-top: 5px;
 
-  color: #8994b8;
+  color: #7c5c2b;
 
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .status-badge {
-  padding:
-    8px 14px;
+  position: relative;
+  overflow: hidden;
 
-  border-radius: 999px;
+  padding: 10px 18px;
 
-  color: #92e9c9;
+  color: #4d3717;
 
   border:
     1px solid
-    rgba(
-      85,
-      205,
-      161,
-      .30
-    );
+    rgba(122,78,20,.45);
+
+  border-radius: 999px;
 
   background:
-    rgba(
-      74,
-      180,
-      143,
-      .10
+    linear-gradient(
+      135deg,
+      rgba(255,245,207,.70),
+      rgba(193,145,61,.22)
     );
 
-  font-size: 13px;
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  box-shadow:
+    inset 0 0 20px rgba(255,255,255,.3);
 }
+
+.status-badge::after {
+  content: "";
+  position: absolute;
+  inset: -100% -60%;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 40%,
+      rgba(255,255,255,.65) 50%,
+      transparent 60%
+    );
+
+  transform: translateX(-100%);
+  animation: holo 5s infinite;
+}
+
+@keyframes holo {
+  0%, 72% {
+    transform: translateX(-90%);
+  }
+
+  100% {
+    transform: translateX(90%);
+  }
+}
+
+
+/* ======================================================
+   EMPTY STATE
+   ====================================================== */
 
 .empty-state {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
-  padding:
-    70px 20px
-    55px;
+  padding: 72px 20px 60px;
 
   text-align: center;
 }
 
 .empty-icon {
-  display: flex;
+  width: 108px;
+  height: 108px;
 
+  margin: 0 auto 25px;
+
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 78px;
-  height: 78px;
-
-  margin:
-    0 auto
-    20px;
-
-  border-radius: 50%;
-
-  font-size: 38px;
-  font-weight: 900;
-
-  color: #d6c17e;
+  color: transparent;
 
   background:
-    linear-gradient(
-      145deg,
-      #30395b,
-      #11182c
-    );
+    url("/assets/feelcoin-coin.webp")
+    center / cover no-repeat;
 
   border:
     1px solid
-    #3d486d;
+    rgba(115,76,20,.38);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 18px 40px rgba(69,43,10,.30);
 }
 
 .empty-state h2 {
-  margin:
-    0 0
-    10px;
+  margin: 0 0 9px;
 
-  font-size: 25px;
+  color: #17283b;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 31px;
 }
 
 .empty-state p {
-  max-width: 580px;
-
+  max-width: 620px;
   margin: auto;
 
-  line-height: 1.7;
+  color: #725b35;
 
-  color: #929dbf;
+  font-size: 14px;
+  line-height: 1.7;
 }
+
+
+/* ======================================================
+   DATA
+   ====================================================== */
 
 .hidden {
   display: none !important;
@@ -298,9 +542,9 @@ button {
 
 .wallet-data {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
-  margin-top: 24px;
+  margin-top: 26px;
 }
 
 .address-layout {
@@ -308,400 +552,888 @@ button {
 
   grid-template-columns:
     minmax(0, 1fr)
-    240px;
+    250px;
 
   gap: 18px;
 }
 
 .data-box,
 .secret-box {
-  padding: 20px;
+  position: relative;
 
-  border-radius: 17px;
-
-  background:
-    rgba(
-      7,
-      12,
-      25,
-      .88
-    );
+  padding: 20px 21px;
 
   border:
     1px solid
-    #202a47;
+    rgba(94,63,21,.35);
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 247, 222, .67);
+
+  box-shadow:
+    inset 0 0 30px rgba(151,103,35,.055),
+    0 4px 16px rgba(80,47,9,.06);
 }
 
 .secret-box {
-  margin-top: 16px;
+  margin-top: 14px;
+}
+
+.data-box::before,
+.secret-box::before {
+  content: "";
+  position: absolute;
+
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+
+  width: 3px;
+
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      #73501d,
+      #ddbc73,
+      #73501d
+    );
+
+  opacity: .70;
 }
 
 .data-label {
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 
-  font-size: 11px;
-  font-weight: 800;
+  color: #795522;
 
-  letter-spacing: 1.25px;
+  font-size: 10px;
+  font-weight: 900;
 
+  letter-spacing: 2.2px;
   text-transform: uppercase;
-
-  color: #8e9dc8;
 }
 
 .data-value {
+  color: #17283a;
+
   font-family:
-    Consolas,
     "Courier New",
+    Consolas,
     monospace;
 
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 700;
 
   line-height: 1.7;
 
   word-break: break-all;
-
-  color: #f0f2ff;
 }
 
 .address-value {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .seed-value {
+  word-spacing: 6px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-size: 16px;
+  font-weight: 700;
 
-  line-height: 2;
-
-  word-spacing: 5px;
+  line-height: 1.9;
 }
 
 .secret-description {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 
-  color: #717ea4;
+  color: #897148;
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
+
+/* ======================================================
+   QR SECURITY SEAL
+   ====================================================== */
+
 .qr-box {
+  position: relative;
+
+  min-height: 250px;
+  padding: 16px;
+
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
-  min-height: 240px;
+  overflow: hidden;
 
-  padding: 12px;
+  border:
+    1px solid
+    rgba(91,57,13,.40);
 
-  border-radius: 17px;
+  border-radius: 16px;
+
+  background:
+    rgba(255,255,255,.90);
+
+  box-shadow:
+    inset 0 0 0 5px rgba(196,150,70,.12),
+    inset 0 0 28px rgba(97,56,11,.06);
+}
+
+.qr-box::before {
+  content: "FEEL";
+  position: absolute;
+
+  right: 10px;
+  top: 8px;
+
+  color: rgba(120,82,26,.17);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 14px;
+  font-weight: 900;
+
+  letter-spacing: 4px;
+}
+
+.qr-box canvas {
+  max-width: 190px;
+  max-height: 190px;
+
+  padding: 5px;
 
   background: white;
 }
 
-.qr-box canvas {
-  max-width: 100%;
-}
-
 .qr-box span {
-  margin-top: 5px;
+  margin-top: 7px;
 
-  color: #333;
+  color: #594220;
 
-  font-size: 10px;
+  font-size: 9px;
+  font-weight: 900;
 
-  font-weight: 800;
-
-  letter-spacing: .7px;
+  letter-spacing: 2px;
 }
+
+
+/* ======================================================
+   COPY BUTTONS
+   ====================================================== */
 
 .small-button {
-  margin-top: 14px;
+  margin-top: 13px;
+  padding: 7px 12px;
 
-  padding:
-    8px 12px;
+  cursor: pointer;
+
+  color: #543817;
 
   border:
     1px solid
-    #303d64;
+    rgba(101,65,17,.34);
 
-  border-radius: 9px;
+  border-radius: 8px;
 
-  background: #141c30;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,249,226,.85),
+      rgba(217,184,121,.36)
+    );
 
-  color: #dce2fa;
+  font-size: 11px;
+  font-weight: 800;
 
-  cursor: pointer;
+  transition:
+    transform .15s ease,
+    box-shadow .15s ease;
 }
 
 .small-button:hover {
-  background: #1c2640;
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 15px rgba(77,46,10,.12);
 }
+
+
+/* ======================================================
+   PRIVACY
+   ====================================================== */
 
 .blurred {
   filter: blur(9px);
 
   user-select: none;
-
   pointer-events: none;
 }
 
+
+/* ======================================================
+   MAIN ACTIONS
+   ====================================================== */
+
 .actions {
   position: relative;
-  z-index: 2;
+  z-index: 4;
 
   display: flex;
   flex-wrap: wrap;
-
-  gap: 11px;
-
   justify-content: center;
 
-  margin-top: 27px;
+  gap: 10px;
+
+  margin-top: 28px;
+  padding-top: 24px;
+
+  border-top:
+    1px dashed
+    rgba(107,71,22,.38);
 }
 
 .button {
-  min-width: 150px;
+  min-width: 165px;
 
-  padding:
-    13px 20px;
-
-  border-radius: 12px;
-
-  border: none;
+  padding: 12px 19px;
 
   cursor: pointer;
 
-  font-size: 14px;
+  border-radius: 10px;
 
-  font-weight: 750;
+  font-size: 12px;
+  font-weight: 900;
+
+  letter-spacing: .45px;
 
   transition:
     transform .15s ease,
-    opacity .15s ease,
-    background .15s ease;
+    box-shadow .15s ease,
+    opacity .15s ease;
 }
 
 .button:hover:not(:disabled) {
-  transform:
-    translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .button:disabled {
-  opacity: .42;
-
+  opacity: .40;
   cursor: not-allowed;
 }
 
 .primary {
-  color: white;
+  color: #fff3cc;
+
+  border:
+    1px solid
+    #94702e;
+
+  background:
+    linear-gradient(
+      145deg,
+      #182a41,
+      #08131f
+    );
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,214,125,.06),
+    0 10px 25px rgba(7,15,25,.22);
+}
+
+.primary:hover:not(:disabled) {
+  box-shadow:
+    0 12px 25px rgba(7,15,25,.32),
+    0 0 18px rgba(197,150,66,.13);
+}
+
+.secondary {
+  color: #3e2d14;
+
+  border:
+    1px solid
+    rgba(104,70,21,.42);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,248,221,.80),
+      rgba(205,167,96,.34)
+    );
+}
+
+
+/* ======================================================
+   SECURITY PANEL
+   ====================================================== */
+
+.security-section {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 30px;
+  padding: 28px;
+
+  color: #efe6d4;
+
+  border:
+    1px solid
+    rgba(213,169,83,.25);
+
+  border-radius: 22px;
 
   background:
     linear-gradient(
       135deg,
-      #8d6aff,
-      #634bd3
+      rgba(5,15,25,.95),
+      rgba(8,24,38,.94)
     );
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.38);
 }
 
-.secondary {
-  color: #e2e7fb;
+.security-section::after {
+  content: "";
+  position: absolute;
 
-  border:
-    1px solid
-    #2d385b;
+  width: 360px;
+  height: 360px;
 
-  background: #151d31;
-}
+  right: -110px;
+  top: -115px;
 
-.security-section {
-  margin-top: 25px;
-
-  padding: 24px;
-
-  border-radius: 20px;
-
-  border:
-    1px solid
-    #202941;
+  opacity: .075;
 
   background:
-    rgba(
-      9,
-      14,
-      27,
-      .70
-    );
+    url("/assets/feelcoin-coin.webp")
+    center / contain no-repeat;
+
+  pointer-events: none;
 }
 
 .security-section h3 {
-  margin:
-    0 0
-    18px;
+  position: relative;
+  z-index: 2;
+
+  margin: 0 0 20px;
+
+  color: #e5bc6a;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 21px;
+  letter-spacing: 1px;
 }
 
 .security-grid {
+  position: relative;
+  z-index: 2;
+
   display: grid;
-
   grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
+    repeat(3, 1fr);
 
-  gap: 15px;
+  gap: 14px;
 }
 
 .security-item {
-  padding: 16px;
-
-  border-radius: 13px;
-
-  background: #0b1120;
+  min-height: 115px;
+  padding: 18px;
 
   border:
     1px solid
-    #1f2944;
+    rgba(220,179,95,.16);
+
+  border-radius: 13px;
+
+  background:
+    rgba(255,255,255,.025);
 }
 
 .security-item strong {
   display: block;
 
-  margin-bottom: 7px;
+  margin-bottom: 8px;
 
-  color: #dbe1f8;
+  color: #e6c67f;
+
+  font-size: 13px;
 }
 
 .security-item span {
-  line-height: 1.5;
+  color: #aeb7bd;
 
-  color: #8794b9;
-
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
+
+/* ======================================================
+   FOOTER
+   ====================================================== */
+
 footer {
-  margin-top: 26px;
+  margin-top: 25px;
 
   text-align: center;
 
-  color: #697696;
+  color: rgba(226,193,125,.55);
 
-  font-size: 13px;
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 12px;
+  letter-spacing: 2px;
 }
 
-@media (
-  max-width: 760px
-) {
+
+/* ======================================================
+   WALLET REVEAL
+   ====================================================== */
+
+.wallet-data:not(.hidden) {
+  animation:
+    walletReveal .65s
+    cubic-bezier(.2,.7,.2,1)
+    both;
+}
+
+@keyframes walletReveal {
+  from {
+    opacity: 0;
+    transform:
+      translateY(14px)
+      scale(.992);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
+
+@media (max-width: 780px) {
+
+  body {
+    background-attachment: scroll;
+  }
 
   .page {
-    width:
-      calc(
-        100% - 20px
-      );
+    width: calc(100% - 18px);
+    padding-top: 10px;
+  }
 
-    padding-top: 25px;
+  .hero {
+    min-height: 420px;
+
+    padding:
+      35px 17px
+      45px;
+
+    border-radius: 20px;
+  }
+
+  .logo {
+    width: 90px;
+    height: 90px;
   }
 
   .hero h1 {
-    font-size: 30px;
+    font-size: 34px;
+  }
+
+  .tagline {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .notice {
+    border-radius: 13px;
+    font-size: 11px;
   }
 
   .wallet-card {
-    padding: 19px;
+    padding: 22px 16px;
+    border-radius: 20px;
   }
 
-  .address-layout {
-    grid-template-columns:
-      1fr;
-  }
-
-  .security-grid {
-    grid-template-columns:
-      1fr;
+  .wallet-card::after {
+    inset: 7px;
+    border-radius: 14px;
   }
 
   .wallet-top {
-    align-items:
-      flex-start;
+    align-items: flex-start;
+    gap: 12px;
+  }
 
-    gap: 15px;
+  .brand {
+    font-size: 20px;
+    letter-spacing: 3px;
   }
 
   .status-badge {
-    font-size: 11px;
+    padding: 8px 10px;
+    font-size: 9px;
+  }
+
+  .address-layout,
+  .security-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-box {
+    min-height: 220px;
   }
 
   .button {
     width: 100%;
   }
+
+  .data-value {
+    font-size: 12px;
+  }
+
+  .seed-value {
+    font-size: 15px;
+  }
 }
+
+
+/* ======================================================
+   PRINT — REAL PAPER WALLET
+   ====================================================== */
 
 @media print {
 
-  body {
-    background: white;
+  @page {
+    size: A4 landscape;
+    margin: 8mm;
+  }
 
-    color: black;
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+
+    color: #17283a;
+
+    background: white !important;
+  }
+
+  body::before,
+  body::after {
+    display: none;
+  }
+
+  .page {
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   .hero,
   .actions,
   .security-section,
   footer {
-    display: none;
-  }
-
-  .page {
-    width: 100%;
-
-    padding: 0;
+    display: none !important;
   }
 
   .wallet-card {
+    width: 100%;
+
+    margin: 0;
+    padding: 10mm;
+
     border:
       1px solid
-      #999;
+      #82622b;
 
-    border-radius: 0;
+    border-radius: 3mm;
 
     box-shadow: none;
 
-    background: white;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
 
-    color: black;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(245,228,191,.92),
+        rgba(239,218,174,.82)
+      ),
+      url("/assets/feelcoin-banknote.webp")
+      center / cover no-repeat !important;
+  }
+
+  .wallet-card::before,
+  .wallet-card::after {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   .watermark {
-    opacity: .04;
+    opacity: .10;
+  }
+
+  .wallet-data {
+    margin-top: 5mm;
+  }
+
+  .address-layout {
+    grid-template-columns:
+      minmax(0, 1fr)
+      53mm;
+
+    gap: 4mm;
   }
 
   .data-box,
   .secret-box {
+    background:
+      rgba(255,248,226,.80) !important;
+
     border:
       1px solid
-      #bbb;
+      rgba(90,58,16,.38);
 
-    background: white;
+    box-shadow: none;
+
+    break-inside: avoid;
   }
 
-  .data-value,
-  .brand {
-    color: black;
-  }
-
-  .data-label {
-    color: #555;
-  }
-
-  .small-button,
-  .status-badge {
-    display: none;
+  .small-button {
+    display: none !important;
   }
 
   .blurred {
-    filter: none;
+    filter: none !important;
+  }
+
+  .qr-box {
+    min-height: 45mm;
+
+    background: white !important;
+  }
+
+  .qr-box canvas {
+    max-width: 38mm;
+    max-height: 38mm;
+  }
+
+  .data-value {
+    color: #111d2b !important;
   }
 }
+
+/* ======================================================
+   V3 — FULL BANKNOTE WALLET
+   ====================================================== */
+
+.wallet-card {
+  background:
+    linear-gradient(
+      rgba(247, 232, 197, .42),
+      rgba(247, 232, 197, .42)
+    ),
+    url("/assets/feelcoin-banknote.webp")
+    center center / cover no-repeat !important;
+
+  min-height: 760px;
+}
+
+.wallet-card::before {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(248, 235, 205, .32) 0%,
+      rgba(248, 235, 205, .18) 48%,
+      rgba(248, 235, 205, .12) 100%
+    ) !important;
+}
+
+.watermark {
+  display: none !important;
+}
+
+.empty-state {
+  min-height: 470px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wallet-data {
+  background: rgba(248, 235, 204, .40);
+  border: 1px solid rgba(105, 68, 19, .20);
+  border-radius: 18px;
+  padding: 20px;
+  backdrop-filter: blur(2px);
+}
+
+@media print {
+  .wallet-card {
+    min-height: 0;
+
+    background:
+      linear-gradient(
+        rgba(247, 232, 197, .25),
+        rgba(247, 232, 197, .25)
+      ),
+      url("/assets/feelcoin-banknote-big.png")
+      center center / cover no-repeat !important;
+  }
+}
+
+/* ======================================================
+   Softer banknote background
+   ====================================================== */
+
+.wallet-card {
+  background:
+    linear-gradient(
+      rgba(248, 235, 205, .88),
+      rgba(248, 235, 205, .88)
+    ),
+    url("/assets/feelcoin-banknote.webp")
+    center center / cover no-repeat !important;
+}
+
+.watermark {
+  display: none !important;
+}
+
+.data-label {
+  color: #684719 !important;
+  font-weight: 900;
+}
+
+.data-value {
+  color: #102033 !important;
+  font-weight: 800;
+}
+
+
+/* ======================================================
+   BANKNOTE ONLY INSIDE WALLET CONTENT AREA
+   ====================================================== */
+
+.wallet-card {
+  background: #f4e4bf !important;
+}
+
+/* remove full-card banknote */
+.wallet-card::before {
+  background: none !important;
+}
+
+.watermark {
+  display: none !important;
+}
+
+/* middle content area only */
+.empty-state,
+.wallet-data {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(248, 235, 205, .82),
+      rgba(248, 235, 205, .82)
+    ),
+    url("/assets/feelcoin-banknote.webp")
+    center center / cover no-repeat;
+
+  border:
+    1px solid rgba(120, 77, 24, .24);
+
+  border-radius: 0;
+
+  margin-left: -31px;
+  margin-right: -31px;
+}
+
+/* empty wallet proportions */
+.empty-state {
+  min-height: 500px;
+
+  padding:
+    80px 45px
+    70px;
+}
+
+/* generated wallet area */
+.wallet-data {
+  padding: 28px 31px;
+  margin-top: 0;
+}
+
+/* keep header clean */
+.wallet-top {
+  background:
+    rgba(248, 235, 205, .96);
+}
+
+/* keep buttons clean */
+.actions {
+  margin-top: 0;
+
+  padding-top: 24px;
+
+  background:
+    rgba(248, 235, 205, .96);
+}
+
+/* stronger foreground readability */
+.empty-state h2,
+.data-value {
+  color: #102033 !important;
+}
+
+.empty-state p {
+  color: #6b5532 !important;
+}
+
+.data-label {
+  color: #684719 !important;
+  font-weight: 900;
+}
+
+/* mobile */
+@media (max-width: 760px) {
+  .empty-state,
+  .wallet-data {
+    margin-left: -19px;
+    margin-right: -19px;
+  }
+
+  .wallet-data {
+    padding: 22px 19px;
+  }
+}
+
