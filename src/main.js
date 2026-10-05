@@ -1528,3 +1528,32 @@ async function imageToDataUrl(
     }
   );
 }
+
+/* ===== FEELCOIN ECOSYSTEM NAV ===== */
+if (!document.querySelector(".ecosystem-nav-wrap")) {
+  const ecosystemNav = document.createElement("div");
+
+  ecosystemNav.className = "ecosystem-nav-wrap";
+
+  ecosystemNav.innerHTML = `
+    <nav class="ecosystem-nav" aria-label="Feelcoin ecosystem">
+      <a href="https://feelcoin.org"
+         target="_blank"
+         rel="noopener noreferrer">Website</a>
+
+      <a href="https://pool.feelcoin.org"
+         target="_blank"
+         rel="noopener noreferrer">Pool</a>
+
+      <a href="https://explorer.feelcoin.org"
+         target="_blank"
+         rel="noopener noreferrer">Explorer</a>
+    </nav>
+  `;
+
+  const app = document.getElementById("app");
+
+  if (app) {
+    app.parentNode.insertBefore(ecosystemNav, app);
+  }
+}

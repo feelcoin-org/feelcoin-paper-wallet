@@ -1437,3 +1437,73 @@ footer {
   }
 }
 
+
+/* ===== FEELCOIN ECOSYSTEM NAV ===== */
+.ecosystem-nav-wrap{
+  width:min(1320px,calc(100% - 36px));
+  margin:18px auto -25px;
+  position:relative;
+  z-index:30;
+}
+
+.ecosystem-nav{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.ecosystem-nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  min-height:40px;
+  padding:9px 15px;
+
+  border:1px solid rgba(216,173,88,.28);
+  border-radius:11px;
+
+  background:rgba(3,10,17,.76);
+
+  color:#f8edd0;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:700;
+
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+
+  transition:.2s ease;
+}
+
+.ecosystem-nav a:hover{
+  color:#ffe6a1;
+  border-color:rgba(255,230,161,.55);
+  background:rgba(20,27,34,.88);
+  transform:translateY(-1px);
+}
+
+@media(max-width:650px){
+  .ecosystem-nav-wrap{
+    width:calc(100% - 20px);
+    margin:10px auto -18px;
+  }
+
+  .ecosystem-nav{
+    width:100%;
+  }
+
+  .ecosystem-nav a{
+    flex:1 1 30%;
+    padding:9px 8px;
+    font-size:12px;
+  }
+}
+
+@media(max-width:420px){
+  .ecosystem-nav a{
+    flex:1 1 100%;
+  }
+}
