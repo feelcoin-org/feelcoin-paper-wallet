@@ -1,19 +1,36 @@
-node_modules/
-dist/
 
-wallets/*
-!wallets/.gitkeep
-
-*.keys
-*.wallet
+*~
 *.address.txt
-*.log
-
+*.backup
+*.backup-*
+*.bak
+*.before-*
+*before-*
+.cache/
+# Development backups
+dist/
+.DS_Store
+# Editors / OS
 .env
 .env.*
-*.password
-
-.DS_Store
-Thumbs.db
-.vscode/
 .idea/
+*.keys
+# Local/runtime
+*.log
+node_modules/
+*.old
+*.p12
+*.password
+*.pem
+*.pfx
+*.pid
+temp/
+Thumbs.db
+tmp/
+.vscode/
+*.wallet
+wallet/
+# Wallet/key material
+wallets/
+wallets/*
+!wallets/.gitkeep

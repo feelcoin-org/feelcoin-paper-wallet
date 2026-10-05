@@ -193,7 +193,7 @@ app.use((req, res, next) => {
 
 app.listen(
   PORT,
-  "0.0.0.0",
+  "127.0.0.1",
   () => {
     console.log(
       `Feelcoin Paper Wallet running on port ${PORT}`
