@@ -1507,3 +1507,147 @@ footer {
     flex:1 1 100%;
   }
 }
+
+
+/* =========================================================
+   FEELCOIN PAPER WALLET — GLASS APPLICATION THEME
+   The printable paper wallet itself remains opaque.
+   ========================================================= */
+
+
+/* Page hero */
+.hero{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3,9,15,.15) 0%,
+      rgba(3,9,15,.30) 48%,
+      rgba(3,9,15,.68) 100%
+    ),
+    url("/assets/feelcoin-community.webp")
+    center 42% / cover no-repeat !important;
+
+  border:1px solid rgba(223,178,86,.24) !important;
+
+  backdrop-filter:blur(8px) saturate(112%);
+  -webkit-backdrop-filter:blur(8px) saturate(112%);
+
+  box-shadow:
+    0 25px 75px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+
+/* Hero notice */
+.notice{
+  background:rgba(3,10,17,.48) !important;
+  border-color:rgba(218,176,89,.22) !important;
+
+  backdrop-filter:blur(14px) saturate(115%);
+  -webkit-backdrop-filter:blur(14px) saturate(115%);
+}
+
+
+/* Ecosystem navigation */
+.ecosystem-nav a{
+  background:rgba(3,10,17,.48) !important;
+
+  border:
+    1px solid
+    rgba(216,173,88,.24) !important;
+
+  backdrop-filter:blur(12px) saturate(115%);
+  -webkit-backdrop-filter:blur(12px) saturate(115%);
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255,255,255,.025);
+}
+
+
+/* General application panels outside the banknote */
+.security-panel,
+.security-card,
+.info-panel,
+.info-card,
+.instructions,
+.instruction-card,
+.controls,
+.control-panel,
+.toolbar,
+.utility-panel{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,24,39,.64),
+      rgba(4,13,22,.56)
+    ) !important;
+
+  border:
+    1px solid
+    rgba(216,173,88,.14) !important;
+
+  backdrop-filter:blur(14px) saturate(110%);
+  -webkit-backdrop-filter:blur(14px) saturate(110%);
+
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.02);
+}
+
+
+/*
+   DO NOT GLASSIFY THE ACTUAL PAPER WALLET.
+   These remain deliberately opaque/readable.
+*/
+.wallet-card,
+.wallet-top,
+.wallet-data,
+.empty-state,
+.actions,
+.data-box,
+.secret-box,
+.qr-box{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+
+/* Preserve QR readability */
+.qr-box,
+.qr-box canvas{
+  print-color-adjust:exact;
+  -webkit-print-color-adjust:exact;
+}
+
+.qr-box canvas{
+  background:white !important;
+}
+
+
+/* Printing must remain clean and deterministic */
+@media print{
+
+  .hero,
+  .ecosystem-nav-wrap,
+  .security-panel,
+  .security-card,
+  .info-panel,
+  .info-card,
+  .instructions,
+  .instruction-card,
+  .controls,
+  .control-panel,
+  .toolbar,
+  .utility-panel{
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+
+}
+
+
+/* =========================================================
+   END FEELCOIN PAPER WALLET — GLASS APPLICATION THEME
+   ========================================================= */
+
