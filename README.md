@@ -61,3 +61,9 @@ The backend communicates with:
 
 ```text
 feelcoin-wallet-rpc
+
+## Contact
+
+Official Feelcoin support and project contact:
+
+**support@feelcoin.org**
