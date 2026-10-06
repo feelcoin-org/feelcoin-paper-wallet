@@ -11,11 +11,18 @@ app.innerHTML = `
 <main class="page">
 
   <section class="hero">
-    <img
-      src="/feelcoin-logo.jpeg"
-      class="logo"
-      alt="Feelcoin"
-    />
+    <a
+      href="https://paper.feelcoin.org"
+      class="home-logo-link"
+      title="Return to Paper Wallet Home"
+      aria-label="Return to Paper Wallet Home"
+    >
+      <img
+        src="/feelcoin-logo.jpeg"
+        class="logo"
+        alt="Feelcoin"
+      />
+    </a>
 
     <h1>Feelcoin Paper Wallet</h1>
     <p class="tagline">In Feels We Trust</p>

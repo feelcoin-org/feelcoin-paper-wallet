@@ -1651,3 +1651,19 @@ footer {
    END FEELCOIN PAPER WALLET — GLASS APPLICATION THEME
    ========================================================= */
 
+
+/* ===== FEELCOIN HOME LOGO LINK ===== */
+.home-logo-link{
+  display:inline-block;
+  line-height:0;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.home-logo-link .logo{
+  transition:transform .18s ease;
+}
+
+.home-logo-link:hover .logo{
+  transform:translateY(-2px) scale(1.02);
+}
