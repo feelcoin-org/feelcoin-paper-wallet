@@ -1543,18 +1543,15 @@ if (!document.querySelector(".ecosystem-nav-wrap")) {
   ecosystemNav.className = "ecosystem-nav-wrap";
 
   ecosystemNav.innerHTML = `
+    <a class="ecosystem-brand" href="https://feelcoin.org/" aria-label="Feelcoin home">
+      <img src="/assets/feelcoin-coin.webp" alt="Feelcoin">
+      <span><strong>Feelcoin Paper Wallet</strong><small>In Feels We Trust</small></span>
+    </a>
     <nav class="ecosystem-nav" aria-label="Feelcoin ecosystem">
-      <a href="https://feelcoin.org"
-         target="_blank"
-         rel="noopener noreferrer">Website</a>
-
-      <a href="https://pool.feelcoin.org"
-         target="_blank"
-         rel="noopener noreferrer">Pool</a>
-
-      <a href="https://explorer.feelcoin.org"
-         target="_blank"
-         rel="noopener noreferrer">Explorer</a>
+      <a href="https://feelcoin.org/">Website</a>
+      <a href="https://pool.feelcoin.org/">Mining Pool</a>
+      <a href="https://explorer.feelcoin.org/">Explorer</a>
+      <a href="https://wallet.feelcoin.org/">Web Wallet</a>
     </nav>
   `;
 
