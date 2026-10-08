@@ -1839,3 +1839,58 @@ footer {
   .wallet-data { padding:15px; }
   .hero h1 { font-size:30px; }
 }
+
+/* =========================================================
+   Community backdrop and subtle pool-style glass panels
+   Screen only: preserve banknote, QR, and printed output.
+   ========================================================= */
+@media screen {
+  html { background:#070b14; }
+  body {
+    background:
+      linear-gradient(180deg,rgba(4,9,17,.68),rgba(4,9,17,.84)),
+      url("/assets/feelcoin-community.webp") center top / cover fixed no-repeat !important;
+    background-color:#070b14 !important;
+  }
+  .ecosystem-nav-wrap {
+    background:rgba(13,20,34,.78) !important;
+    border:1px solid rgba(150,171,205,.19);
+    backdrop-filter:blur(16px) saturate(120%);
+    -webkit-backdrop-filter:blur(16px) saturate(120%);
+    box-shadow:0 16px 44px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .hero {
+    background:
+      linear-gradient(110deg,rgba(13,20,34,.83),rgba(13,20,34,.66)),
+      url("/assets/feelcoin-community.webp") center 40% / cover no-repeat !important;
+    border:1px solid rgba(150,171,205,.22) !important;
+    backdrop-filter:blur(14px) saturate(112%);
+    -webkit-backdrop-filter:blur(14px) saturate(112%);
+    box-shadow:0 18px 50px rgba(0,0,0,.22) !important;
+  }
+  .wallet-card {
+    background:rgba(13,20,34,.80) !important;
+    border:1px solid rgba(150,171,205,.20);
+    backdrop-filter:blur(17px) saturate(115%) !important;
+    -webkit-backdrop-filter:blur(17px) saturate(115%) !important;
+    box-shadow:0 18px 48px rgba(0,0,0,.24);
+  }
+  .security-section {
+    background:linear-gradient(180deg,rgba(17,26,43,.81),rgba(10,17,30,.77)) !important;
+    border:1px solid rgba(150,171,205,.20);
+    backdrop-filter:blur(16px) saturate(112%);
+    -webkit-backdrop-filter:blur(16px) saturate(112%);
+    box-shadow:0 16px 44px rgba(0,0,0,.22);
+  }
+  .security-item {
+    background:rgba(16,27,44,.68);
+    border-color:rgba(150,171,205,.17);
+  }
+  .empty-state,.wallet-data {
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+  }
+}
+@media screen and (max-width:780px) {
+  body { background-attachment:scroll !important; }
+}
