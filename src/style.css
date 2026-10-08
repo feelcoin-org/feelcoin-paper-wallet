@@ -2007,7 +2007,7 @@ footer {
     margin:0;
     border:0;
     border-radius:50%;
-    background:url("/feelcoin-logo.jpeg") center / contain no-repeat !important;
+    background:url("/feelcoin-logo-optimized.webp") center / contain no-repeat !important;
     box-shadow:none !important;
     font-size:0;
     color:transparent;
@@ -2075,7 +2075,7 @@ footer {
     padding:0 !important;
     border:0 !important;
     border-radius:50% !important;
-    background:url("/feelcoin-logo.jpeg") center / contain no-repeat !important;
+    background:url("/feelcoin-logo-optimized.webp") center / contain no-repeat !important;
     box-shadow:0 14px 34px rgba(0,0,0,.23) !important;
     overflow:visible !important;
     font-size:0 !important;

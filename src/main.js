@@ -18,7 +18,7 @@ app.innerHTML = `
       aria-label="Return to Paper Wallet Home"
     >
       <img
-        src="/feelcoin-logo.jpeg"
+        src="/feelcoin-logo-optimized.webp"
         class="logo"
         alt="Feelcoin"
       />
@@ -36,7 +36,7 @@ app.innerHTML = `
   <section class="wallet-card" id="paperWallet">
 
     <img
-      src="/feelcoin-logo.jpeg"
+      src="/feelcoin-logo-optimized.webp"
       class="watermark"
       alt=""
     />
