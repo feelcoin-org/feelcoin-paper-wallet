@@ -1640,3 +1640,101 @@ footer {
 .home-logo-link:hover .logo{
   transform:translateY(-2px) scale(1.02);
 }
+
+
+/* =========================================================
+   ECOSYSTEM UI REFINEMENT — pool-inspired screen layout
+   Keep the printable FEEL banknote and print rules intact.
+   ========================================================= */
+@media screen {
+  body {
+    background:
+      radial-gradient(circle at 16% 0%, rgba(216,173,88,.10), transparent 32%),
+      radial-gradient(circle at 92% 8%, rgba(34,211,166,.045), transparent 27%),
+      #070b14;
+  }
+  .ecosystem-nav-wrap {
+    width: min(1240px, calc(100% - 36px));
+    margin: 22px auto 0;
+    padding: 13px 17px;
+    border: 1px solid #253148;
+    border-radius: 20px;
+    background: rgba(13,20,34,.96);
+    box-shadow: 0 14px 35px rgba(0,0,0,.16);
+  }
+  .ecosystem-nav { justify-content: flex-end; gap: 7px; }
+  .ecosystem-nav a {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 10px;
+    color: #bac8db;
+    font-weight: 650;
+    min-height: 38px;
+    box-shadow: none;
+  }
+  .ecosystem-nav a:hover {
+    background: #172237 !important;
+    border-color: #2b3950 !important;
+    color: #fff2ce;
+  }
+  .page { width: min(1240px, calc(100% - 36px)); padding: 18px 0 58px; }
+  .hero {
+    min-height: 300px;
+    padding: 32px 28px 42px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid #29374a !important;
+    background:
+      linear-gradient(90deg, rgba(9,17,30,.93), rgba(9,17,30,.69)),
+      url("/assets/feelcoin-community.webp") center 42% / cover no-repeat !important;
+    box-shadow: 0 18px 48px rgba(0,0,0,.23) !important;
+  }
+  .hero::after { letter-spacing: 2px; }
+  .logo { width: 76px; height: 76px; animation: none; }
+  .hero h1 {
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.12;
+    letter-spacing: -.035em;
+    text-shadow: none;
+    font-weight: 800;
+  }
+  .tagline { font-size: 13px; letter-spacing: .12em; font-style: normal; font-weight: 700; }
+  .notice {
+    max-width: 780px;
+    margin-top: 17px;
+    border-radius: 12px;
+    font-size: 13px;
+    background: rgba(10,19,32,.88) !important;
+    border: 1px solid #334054 !important;
+  }
+  .wallet-card {
+    border-radius: 20px;
+    border: 1px solid #c9a45c;
+    box-shadow: 0 18px 48px rgba(0,0,0,.30);
+  }
+  .wallet-card::after { border-radius: 14px; }
+  .security-section {
+    margin-top: 20px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #111a2b, #0a111e);
+    border: 1px solid #28364b;
+    box-shadow: 0 12px 35px rgba(0,0,0,.16);
+  }
+  .security-section h3 { color: #f2d493; font-size: 19px; letter-spacing: -.01em; }
+  .security-item {
+    min-height: 105px;
+    border: 1px solid #2a3950;
+    background: #101b2c;
+  }
+  .security-item strong { color: #f3d493; }
+  .security-item span { color: #b5c1d0; }
+  footer { letter-spacing: .04em; color: #8da0ba; }
+}
+@media screen and (max-width: 780px) {
+  .ecosystem-nav-wrap { width: calc(100% - 18px); margin-top: 10px; padding: 10px; }
+  .page { width: calc(100% - 18px); padding-top: 12px; }
+  .hero { min-height: 310px; padding: 25px 16px 38px; }
+  .logo { width: 72px; height: 72px; }
+  .hero h1 { font-size: 32px; }
+  .ecosystem-nav a { flex: 1 1 auto; }
+}
