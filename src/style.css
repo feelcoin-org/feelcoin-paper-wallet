@@ -1738,3 +1738,104 @@ footer {
   .hero h1 { font-size: 32px; }
   .ecosystem-nav a { flex: 1 1 auto; }
 }
+
+/* =========================================================
+   FEELCOIN POOL-MATCHING APP SHELL — screen only
+   Printable wallet and PDF rendering remain untouched.
+   ========================================================= */
+@media screen {
+  body::before, body::after { display:none; }
+  .ecosystem-nav-wrap {
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    max-width:1240px; width:calc(100% - 36px); margin:20px auto 0;
+    padding:16px 22px; border-radius:22px;
+    background:#0d1422; border:1px solid #26344b;
+  }
+  .ecosystem-brand {
+    display:flex; align-items:center; gap:14px; min-width:0;
+    text-decoration:none; color:#eef4ff;
+  }
+  .ecosystem-brand img {
+    width:58px; height:58px; object-fit:cover; border-radius:50%;
+    border:2px solid rgba(255,255,255,.18);
+  }
+  .ecosystem-brand span { display:flex; flex-direction:column; gap:5px; }
+  .ecosystem-brand strong { font-size:20px; letter-spacing:-.02em; }
+  .ecosystem-brand small { font-size:12px; color:#94a6bf; }
+  .ecosystem-nav { flex-wrap:wrap; justify-content:flex-end; }
+  .ecosystem-nav a { padding:10px 12px; font-size:13px; }
+  .hero {
+    display:flex; align-items:flex-start; justify-content:center;
+    text-align:left; min-height:220px; padding:35px 38px;
+    background:
+      radial-gradient(circle at 90% 25%, rgba(216,173,88,.12), transparent 32%),
+      linear-gradient(180deg,#111a2b,#0a111e) !important;
+    border:1px solid #26344b !important; box-shadow:none !important;
+  }
+  .hero::before,.hero::after { display:none; }
+  .hero .home-logo-link { display:none; }
+  .hero h1 { align-self:stretch; width:100%; margin:0 0 10px; font-size:clamp(30px,4vw,43px); color:#eef4ff; }
+  .hero .tagline { align-self:stretch; width:100%; color:#d9b56c; }
+  .hero .notice {
+    align-self:stretch; margin:16px 0 0; max-width:780px;
+    color:#b8c7da; border:0 !important; padding:0;
+    background:transparent !important; box-shadow:none;
+    backdrop-filter:none; font-size:14px;
+  }
+  .wallet-card {
+    min-height:0; background:#0d1422 !important;
+    border:1px solid #26344b; padding:24px;
+    color:#eef4ff; border-radius:18px;
+  }
+  .wallet-card::before,.wallet-card::after { display:none; }
+  .wallet-top {
+    background:transparent; padding:0 0 18px;
+    border-bottom:1px solid #26344b;
+  }
+  .wallet-top .brand { color:#eef4ff; font-size:21px; letter-spacing:.04em; text-shadow:none; }
+  .wallet-top .subtitle { color:#96a9c1; letter-spacing:.09em; }
+  .wallet-top .status-badge {
+    background:#172237; color:#e8c681; border:1px solid #36445a;
+    font-style:normal; box-shadow:none;
+  }
+  .wallet-top .status-badge::after { display:none; }
+  .empty-state,.wallet-data {
+    margin:18px 0 0; border-radius:14px;
+    border:1px solid rgba(195,156,84,.42);
+    background:
+      linear-gradient(rgba(248,235,205,.87),rgba(248,235,205,.87)),
+      url("/assets/feelcoin-banknote.webp") center / cover no-repeat;
+  }
+  .empty-state { min-height:340px; padding:44px 22px; }
+  .empty-icon { width:78px; height:78px; margin-bottom:17px; }
+  .empty-state h2 { font-size:25px; }
+  .wallet-data { padding:24px; }
+  .actions {
+    background:transparent; border-top:1px solid #26344b;
+    padding-top:20px; margin-top:20px; justify-content:flex-start;
+  }
+  .button { min-width:155px; font-size:13px; border-radius:11px; }
+  .primary {
+    background:linear-gradient(135deg,#c99a45,#a9772c);
+    color:#101826; border:1px solid #d4ae63;
+  }
+  .secondary { background:#162238; border:1px solid #33435b; color:#e7effb; }
+  .secondary:hover:not(:disabled) { background:#203049; }
+  .security-section { padding:25px; }
+}
+@media screen and (max-width:850px) {
+  .ecosystem-nav-wrap { flex-direction:column; align-items:stretch; padding:15px; }
+  .ecosystem-nav { justify-content:flex-start; }
+  .hero { padding:27px 22px; }
+}
+@media screen and (max-width:600px) {
+  .ecosystem-nav-wrap { width:calc(100% - 18px); }
+  .ecosystem-brand img { width:46px; height:46px; }
+  .ecosystem-brand strong { font-size:17px; }
+  .ecosystem-nav a { flex:1 1 auto; }
+  .wallet-card { padding:14px; }
+  .wallet-top .brand { font-size:17px; }
+  .wallet-top .status-badge { font-size:10px; }
+  .wallet-data { padding:15px; }
+  .hero h1 { font-size:30px; }
+}
