@@ -12,12 +12,7 @@
   --paper: #f1dfb6;
   --paper-dark: #caa96b;
 
-  font-family:
-    Inter,
-    "Segoe UI",
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   color: var(--ink);
   background: #02070d;
@@ -201,10 +196,7 @@ button {
 
   margin: 18px 0 4px;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
@@ -226,10 +218,7 @@ button {
 
   color: #e4bd69;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 17px;
   font-style: italic;
@@ -380,10 +369,7 @@ button {
 }
 
 .brand {
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   color: #192a40;
 
@@ -429,9 +415,7 @@ button {
       rgba(193,145,61,.22)
     );
 
-  font-family:
-    Georgia,
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 12px;
   font-style: italic;
@@ -514,9 +498,7 @@ button {
 
   color: #17283b;
 
-  font-family:
-    Georgia,
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 31px;
 }
@@ -639,10 +621,7 @@ button {
 .seed-value {
   word-spacing: 6px;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 16px;
   font-weight: 700;
@@ -699,9 +678,7 @@ button {
 
   color: rgba(120,82,26,.17);
 
-  font-family:
-    Georgia,
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 14px;
   font-weight: 900;
@@ -932,9 +909,7 @@ button {
 
   color: #e5bc6a;
 
-  font-family:
-    Georgia,
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 21px;
   letter-spacing: 1px;
@@ -994,9 +969,7 @@ footer {
 
   color: rgba(226,193,125,.55);
 
-  font-family:
-    Georgia,
-    serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   font-size: 12px;
   letter-spacing: 2px;
