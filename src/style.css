@@ -1947,3 +1947,23 @@ footer {
   .empty-state { min-height:300px; padding:35px 16px; }
   .empty-state h2 { font-size:23px; }
 }
+
+/* Paper wallet screen: remove banknote artwork from the central panel.
+   Leave PDF and print styling untouched. */
+@media screen {
+  .empty-state,
+  .wallet-data {
+    background: linear-gradient(180deg, #172338 0%, #101a2b 100%) !important;
+    border: 1px solid rgba(150,171,205,.22);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  }
+  .empty-state h2,
+  .empty-state p { color:#eef4ff !important; text-shadow:none !important; }
+  .empty-state p { color:#aebed3 !important; }
+  .empty-icon { background:url("/assets/feelcoin-coin.webp") center / cover no-repeat; }
+  .wallet-data .data-box,
+  .wallet-data .secret-box {
+    background:#eae0c9;
+    border-color:#b99c6b;
+  }
+}
