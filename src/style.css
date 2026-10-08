@@ -1967,3 +1967,60 @@ footer {
     border-color:#b99c6b;
   }
 }
+
+/* Split welcome panel: text left, official coin artwork right.
+   Screen only; generated wallet, PDF and print unchanged. */
+@media screen {
+  .empty-state:not(.hidden) {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) minmax(180px,34%);
+    grid-template-rows:auto auto;
+    align-content:center;
+    align-items:center;
+    column-gap:32px;
+    row-gap:12px;
+    text-align:left !important;
+    min-height:300px;
+    padding:40px clamp(25px,4vw,64px);
+  }
+  .empty-state:not(.hidden) h2 {
+    grid-column:1;
+    grid-row:1;
+    margin:0;
+    max-width:560px;
+    text-align:left;
+  }
+  .empty-state:not(.hidden) p {
+    grid-column:1;
+    grid-row:2;
+    margin:0;
+    max-width:560px;
+    text-align:left;
+  }
+  .empty-state:not(.hidden) .empty-icon {
+    grid-column:2;
+    grid-row:1 / span 2;
+    justify-self:center;
+    align-self:center;
+    width:clamp(155px,19vw,235px);
+    height:clamp(155px,19vw,235px);
+    margin:0;
+    border:0;
+    border-radius:50%;
+    background:url("/assets/feelcoin-coin.webp") center / contain no-repeat !important;
+    box-shadow:none !important;
+    font-size:0;
+    color:transparent;
+  }
+}
+@media screen and (max-width:650px) {
+  .empty-state:not(.hidden) {
+    grid-template-columns:minmax(0,1fr) 105px;
+    gap:10px 14px;
+    padding:28px 20px;
+    min-height:230px;
+  }
+  .empty-state:not(.hidden) .empty-icon { width:100px; height:100px; }
+  .empty-state:not(.hidden) h2 { font-size:clamp(20px,5vw,25px); }
+  .empty-state:not(.hidden) p { font-size:13px; line-height:1.5; }
+}
