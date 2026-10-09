@@ -34,7 +34,7 @@ body {
       rgba(2, 7, 13, .24),
       rgba(2, 7, 13, .93)
     ),
-    url("/assets/feelcoin-community.webp")
+    url("/assets/feelcoin-community-fast.webp")
     center top / cover fixed no-repeat;
 }
 
@@ -117,7 +117,7 @@ button {
       rgba(3, 9, 15, .30) 45%,
       rgba(3, 9, 15, .93) 100%
     ),
-    url("/assets/feelcoin-community.webp")
+    url("/assets/feelcoin-community-fast.webp")
     center 42% / cover no-repeat;
 
   box-shadow:
@@ -1497,7 +1497,7 @@ footer {
       rgba(3,9,15,.30) 48%,
       rgba(3,9,15,.68) 100%
     ),
-    url("/assets/feelcoin-community.webp")
+    url("/assets/feelcoin-community-fast.webp")
     center 42% / cover no-repeat !important;
 
   border:1px solid rgba(223,178,86,.24) !important;
@@ -1686,7 +1686,7 @@ footer {
     border: 1px solid #29374a !important;
     background:
       linear-gradient(90deg, rgba(9,17,30,.93), rgba(9,17,30,.69)),
-      url("/assets/feelcoin-community.webp") center 42% / cover no-repeat !important;
+      url("/assets/feelcoin-community-fast.webp") center 42% / cover no-repeat !important;
     box-shadow: 0 18px 48px rgba(0,0,0,.23) !important;
   }
   .hero::after { letter-spacing: 2px; }
@@ -1849,7 +1849,7 @@ footer {
   body {
     background:
       linear-gradient(180deg,rgba(4,9,17,.68),rgba(4,9,17,.84)),
-      url("/assets/feelcoin-community.webp") center top / cover fixed no-repeat !important;
+      url("/assets/feelcoin-community-fast.webp") center top / cover fixed no-repeat !important;
     background-color:#070b14 !important;
   }
   .ecosystem-nav-wrap {
@@ -1862,7 +1862,7 @@ footer {
   .hero {
     background:
       linear-gradient(110deg,rgba(13,20,34,.83),rgba(13,20,34,.66)),
-      url("/assets/feelcoin-community.webp") center 40% / cover no-repeat !important;
+      url("/assets/feelcoin-community-fast.webp") center 40% / cover no-repeat !important;
     border:1px solid rgba(150,171,205,.22) !important;
     backdrop-filter:blur(14px) saturate(112%);
     -webkit-backdrop-filter:blur(14px) saturate(112%);
