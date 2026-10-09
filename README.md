@@ -1,67 +1,50 @@
-# Feelcoin Paper Wallet
-
-<!-- FEELCOIN-OFFICIAL-LINKS:START -->
-## Official Feelcoin Ecosystem
-
-| Service | Official address |
-|---|---|
-| Website | https://feelcoin.org |
-| Mining Pool | https://pool.feelcoin.org |
-| Block Explorer | https://explorer.feelcoin.org |
-| Non-Custodial Web Wallet | https://wallet.feelcoin.org |
-| Paper Wallet | https://paper.feelcoin.org |
-
-### Mining endpoints
-
-Standard mining: `pool.feelcoin.org:4242`
-
-TLS mining: `pool.feelcoin.org:4244`
-
-`feelcoin.org` is the canonical public domain for the Feelcoin ecosystem.
-<!-- FEELCOIN-OFFICIAL-LINKS:END -->
-
-
-![Feelcoin Logo](public/feelcoin-logo.jpeg)
+# 🪙 Feelcoin Paper Wallet
 
 **Official Feelcoin paper wallet generator**
 
-> In Feels We Trust
+🌐 **Paper wallet:** https://paper.feelcoin.org  
+**Motto:** *In Feels We Trust.*
 
-Feelcoin Paper Wallet is a web-based wallet generator designed for the Feelcoin network. It creates genuine Feelcoin wallets using the official Feelcoin wallet RPC engine and provides the recovery information needed for secure offline storage.
+Feelcoin Paper Wallet is a web-based generator for Feelcoin wallet recovery material. It works with the Feelcoin wallet RPC engine and provides wallet information intended for careful offline backup and printing.
 
 ## Features
 
-- Genuine Feelcoin wallet generation
-- Feelcoin public address
-- 25-word recovery seed
-- Private spend key
-- Private view key
-- Public address QR code
-- Hide / show private wallet data
-- Copy address and private data
-- Printable paper wallet
-- PDF export
-- Responsive Feelcoin-branded interface
-- Temporary wallet cleanup after generation
+- Generate a Feelcoin wallet and public receiving address.
+- Display the 25-word recovery seed, private spend key and private view key.
+- Generate a public address QR code.
+- Hide or reveal sensitive wallet information.
+- Copy address and wallet information when needed.
+- Create a printable paper wallet and export a PDF.
+- Use a responsive Feelcoin-branded interface.
 
-## Architecture
+## Security — read before generating a wallet
 
-The current implementation uses:
+**A paper wallet exposes highly sensitive recovery material.** Anyone who obtains the seed or private spend key can control the corresponding funds.
 
-- Node.js
-- Express
-- Vite
-- jsPDF
-- QRCode
-- Feelcoin Wallet RPC
+- Generate and print only in a trusted environment.
+- Keep seeds and private keys away from screenshots, chats, cloud uploads and shared printers.
+- Store your recovery material securely and separately from everyday devices.
+- Verify wallet recovery using a safe test workflow before depositing meaningful funds.
+- This tool's website and backend services should not be assumed to provide a fully offline, air-gapped generation process.
 
-The web frontend communicates with a local backend API.
+## How it works
 
-The backend communicates with:
+The project uses Node.js, Express, Vite, jsPDF and QRCode. Its frontend communicates with a local application backend; the backend uses Feelcoin Wallet RPC to generate wallet information.
 
-```text
-feelcoin-wallet-rpc
-```
+This is separate from the Android and desktop wallet applications, which have different storage and operational models.
+
+## Official Feelcoin ecosystem
+
+| Resource | Link |
+| --- | --- |
+| Website | https://feelcoin.org |
+| Blockchain | https://github.com/feelcoin-org/feelcoin |
+| Mining pool | https://pool.feelcoin.org |
+| Block explorer | https://explorer.feelcoin.org |
+| Web wallet | https://wallet.feelcoin.org |
+| Paper wallet | https://paper.feelcoin.org |
+| Android wallet | https://github.com/feelcoin-org/feelcoin-android |
+| Desktop wallet | https://github.com/feelcoin-org/feelcoin-desktop |
 
 ---
 
