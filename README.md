@@ -1,5 +1,9 @@
 # 🪙 Feelcoin Paper Wallet
 
+<p align="center">
+  <a href="https://feelcoin.org"><img src="https://feelcoin.org/assets/feelcoin-logo-v2.png" alt="Official Feelcoin logo" width="144"></a>
+</p>
+
 **Official Feelcoin paper wallet generator**
 
 🌐 **Paper wallet:** https://paper.feelcoin.org  
