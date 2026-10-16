@@ -171,7 +171,7 @@ button {
   object-fit: cover;
   border-radius: 50%;
 
-  content: url("/assets/feelcoin-coin.webp");
+  content: url("/assets/feelcoin-logo-v2.png");
 
   filter:
     drop-shadow(0 15px 24px rgba(0,0,0,.60))
@@ -480,7 +480,7 @@ button {
   color: transparent;
 
   background:
-    url("/assets/feelcoin-coin.webp")
+    url("/assets/feelcoin-logo-v2.png")
     center / cover no-repeat;
 
   border:
@@ -895,7 +895,7 @@ button {
   opacity: .075;
 
   background:
-    url("/assets/feelcoin-coin.webp")
+    url("/assets/feelcoin-logo-v2.png")
     center / contain no-repeat;
 
   pointer-events: none;
@@ -1960,7 +1960,7 @@ footer {
   .empty-state h2,
   .empty-state p { color:#eef4ff !important; text-shadow:none !important; }
   .empty-state p { color:#aebed3 !important; }
-  .empty-icon { background:url("/assets/feelcoin-coin.webp") center / cover no-repeat; }
+  .empty-icon { background:url("/assets/feelcoin-logo-v2.png") center / cover no-repeat; }
   .wallet-data .data-box,
   .wallet-data .secret-box {
     background:#eae0c9;
@@ -2007,7 +2007,7 @@ footer {
     margin:0;
     border:0;
     border-radius:50%;
-    background:url("/feelcoin-logo-optimized.webp") center / contain no-repeat !important;
+    background:url("/assets/feelcoin-logo-v2.png") center / contain no-repeat !important;
     box-shadow:none !important;
     font-size:0;
     color:transparent;
@@ -2075,7 +2075,7 @@ footer {
     padding:0 !important;
     border:0 !important;
     border-radius:50% !important;
-    background:url("/feelcoin-logo-optimized.webp") center / contain no-repeat !important;
+    background:url("/assets/feelcoin-logo-v2.png") center / contain no-repeat !important;
     box-shadow:0 14px 34px rgba(0,0,0,.23) !important;
     overflow:visible !important;
     font-size:0 !important;
