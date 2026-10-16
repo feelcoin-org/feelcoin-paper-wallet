@@ -545,10 +545,9 @@ async function createPdf() {
     const H = 297;
 
 
-    // Keep PDF selection/copy exact: each credential must be a single
-    // PDF text operation, never split into independently positioned lines.
-    // jsPDF's splitTextToSize() makes PDF readers copy line breaks or spaces.
-    // This preserves actual mnemonic word separators and all key characters.
+    // A PDF viewer may insert artificial whitespace between independently
+    // positioned text lines. On the copy-ready page, write each credential
+    // once as a continuous text string, preserving its exact characters.
     function drawCopySafePdfValue(value, x, y, maxWidth, fontSize) {
       if (typeof value !== "string" || !value || /[\r\n]/.test(value)) {
         throw new Error("Invalid wallet credential format for PDF export");
@@ -559,7 +558,7 @@ async function createPdf() {
         throw new Error("Unable to measure wallet PDF text");
       }
       const fittedSize = measuredWidth > maxWidth
-        ? fontSize * (maxWidth / measuredWidth) * 0.98
+        ? fontSize * maxWidth / measuredWidth * 0.98
         : fontSize;
       doc.setFontSize(fittedSize);
       doc.text(value, x, y, { charSpace: 0 });
@@ -1046,12 +1045,18 @@ async function createPdf() {
       "bold"
     );
 
-    drawCopySafePdfValue(
-      currentWallet.address,
+    doc.setFontSize(7);
+
+    const addressLines =
+      doc.splitTextToSize(
+        currentWallet.address,
+        110
+      );
+
+    doc.text(
+      addressLines,
       26,
-      publicY + 14,
-      110,
-      7
+      publicY + 14
     );
 
 
@@ -1248,12 +1253,18 @@ async function createPdf() {
       "bold"
     );
 
-    drawCopySafePdfValue(
-      currentWallet.seed,
+    doc.setFontSize(8.2);
+
+    const seedLines =
+      doc.splitTextToSize(
+        currentWallet.seed,
+        164
+      );
+
+    doc.text(
+      seedLines,
       22,
-      panelY + 38,
-      164,
-      8.2
+      panelY + 38
     );
 
 
@@ -1309,12 +1320,18 @@ async function createPdf() {
       "normal"
     );
 
-    drawCopySafePdfValue(
-      currentWallet.spendKey,
+    doc.setFontSize(6.3);
+
+    const spendLines =
+      doc.splitTextToSize(
+        currentWallet.spendKey,
+        75
+      );
+
+    doc.text(
+      spendLines,
       22,
-      panelY + 77,
-      75,
-      6.3
+      panelY + 77
     );
 
 
@@ -1352,12 +1369,18 @@ async function createPdf() {
       "normal"
     );
 
-    drawCopySafePdfValue(
-      currentWallet.viewKey,
+    doc.setFontSize(6.3);
+
+    const viewLines =
+      doc.splitTextToSize(
+        currentWallet.viewKey,
+        75
+      );
+
+    doc.text(
+      viewLines,
       110,
-      panelY + 77,
-      75,
-      6.3
+      panelY + 77
     );
 
 
@@ -1411,6 +1434,80 @@ async function createPdf() {
       {
         align: "right"
       }
+    );
+
+
+    /* =====================================================
+       COPY-READY PAGE (LANDSCAPE)
+       The first page remains the readable printable wallet.
+       The second page uses one PDF text operation per value,
+       so selection does not introduce wrap-created whitespace.
+       ===================================================== */
+    doc.addPage("a4", "landscape");
+    doc.setFillColor(247, 249, 252);
+    doc.rect(0, 0, 297, 210, "F");
+
+    doc.setTextColor(22, 37, 53);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text("FEELCOIN | COPY-READY CREDENTIALS", 16, 22);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(
+      "Select and copy the value inside each row. Do not include the label.",
+      16, 31
+    );
+
+    function copyReadyRow(label, value, top, fontName, preferredSize) {
+      doc.setTextColor(102, 72, 30);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.text(label, 16, top);
+
+      doc.setFillColor(255, 255, 255);
+      doc.setDrawColor(190, 164, 106);
+      doc.roundedRect(16, top + 5, 265, 18, 2, 2, "FD");
+
+      doc.setTextColor(20, 34, 51);
+      doc.setFont(fontName, "normal");
+      drawCopySafePdfValue(value, 19, top + 16, 259, preferredSize);
+    }
+
+    copyReadyRow(
+      "PUBLIC FEELCOIN ADDRESS",
+      currentWallet.address,
+      40, "courier", 10
+    );
+    copyReadyRow(
+      "PRIVATE SPEND KEY",
+      currentWallet.spendKey,
+      78, "courier", 10
+    );
+    copyReadyRow(
+      "PRIVATE VIEW KEY",
+      currentWallet.viewKey,
+      116, "courier", 10
+    );
+    copyReadyRow(
+      "RECOVERY SEED (single spaces between words)",
+      currentWallet.seed,
+      154, "times", 10
+    );
+
+    doc.setTextColor(145, 49, 38);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.text(
+      "CONFIDENTIAL: Private keys and recovery seed grant control of this wallet. Never share this page.",
+      16, 190
+    );
+    doc.setTextColor(80, 94, 110);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.text(
+      "Page 1: readable printable paper wallet. Page 2: exact copy/paste values. For a one-page paper backup, print page 1 only.",
+      16, 201
     );
 
 
