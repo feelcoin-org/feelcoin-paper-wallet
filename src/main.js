@@ -1,6 +1,7 @@
 import "./style.css";
 import QRCode from "qrcode";
 import { jsPDF } from "jspdf";
+import { drawCopySafePdfValue } from "./pdf-copy.js";
 
 const app = document.querySelector("#app");
 
@@ -543,26 +544,6 @@ async function createPdf() {
 
     const W = 210;
     const H = 297;
-
-
-    // A PDF viewer may insert artificial whitespace between independently
-    // positioned text lines. On the copy-ready page, write each credential
-    // once as a continuous text string, preserving its exact characters.
-    function drawCopySafePdfValue(value, x, y, maxWidth, fontSize) {
-      if (typeof value !== "string" || !value || /[\r\n]/.test(value)) {
-        throw new Error("Invalid wallet credential format for PDF export");
-      }
-      doc.setFontSize(fontSize);
-      const measuredWidth = doc.getTextWidth(value);
-      if (!Number.isFinite(measuredWidth) || measuredWidth <= 0) {
-        throw new Error("Unable to measure wallet PDF text");
-      }
-      const fittedSize = measuredWidth > maxWidth
-        ? fontSize * maxWidth / measuredWidth * 0.98
-        : fontSize;
-      doc.setFontSize(fittedSize);
-      doc.text(value, x, y, { charSpace: 0 });
-    }
 
 
     async function loadImage(url, mime = "image/png", quality = 0.95) {
@@ -1471,7 +1452,7 @@ async function createPdf() {
 
       doc.setTextColor(20, 34, 51);
       doc.setFont(fontName, "normal");
-      drawCopySafePdfValue(value, 19, top + 16, 259, preferredSize);
+      drawCopySafePdfValue(doc, value, 19, top + 16, 259, preferredSize);
     }
 
     copyReadyRow(
