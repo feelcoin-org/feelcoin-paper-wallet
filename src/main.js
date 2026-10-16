@@ -545,6 +545,27 @@ async function createPdf() {
     const H = 297;
 
 
+    // Keep PDF selection/copy exact: each credential must be a single
+    // PDF text operation, never split into independently positioned lines.
+    // jsPDF's splitTextToSize() makes PDF readers copy line breaks or spaces.
+    // This preserves actual mnemonic word separators and all key characters.
+    function drawCopySafePdfValue(value, x, y, maxWidth, fontSize) {
+      if (typeof value !== "string" || !value || /[\r\n]/.test(value)) {
+        throw new Error("Invalid wallet credential format for PDF export");
+      }
+      doc.setFontSize(fontSize);
+      const measuredWidth = doc.getTextWidth(value);
+      if (!Number.isFinite(measuredWidth) || measuredWidth <= 0) {
+        throw new Error("Unable to measure wallet PDF text");
+      }
+      const fittedSize = measuredWidth > maxWidth
+        ? fontSize * (maxWidth / measuredWidth) * 0.98
+        : fontSize;
+      doc.setFontSize(fittedSize);
+      doc.text(value, x, y, { charSpace: 0 });
+    }
+
+
     async function loadImage(url, mime = "image/png", quality = 0.95) {
 
       const img = await new Promise((resolve, reject) => {
@@ -1025,18 +1046,12 @@ async function createPdf() {
       "bold"
     );
 
-    doc.setFontSize(7);
-
-    const addressLines =
-      doc.splitTextToSize(
-        currentWallet.address,
-        110
-      );
-
-    doc.text(
-      addressLines,
+    drawCopySafePdfValue(
+      currentWallet.address,
       26,
-      publicY + 14
+      publicY + 14,
+      110,
+      7
     );
 
 
@@ -1233,18 +1248,12 @@ async function createPdf() {
       "bold"
     );
 
-    doc.setFontSize(8.2);
-
-    const seedLines =
-      doc.splitTextToSize(
-        currentWallet.seed,
-        164
-      );
-
-    doc.text(
-      seedLines,
+    drawCopySafePdfValue(
+      currentWallet.seed,
       22,
-      panelY + 38
+      panelY + 38,
+      164,
+      8.2
     );
 
 
@@ -1300,18 +1309,12 @@ async function createPdf() {
       "normal"
     );
 
-    doc.setFontSize(6.3);
-
-    const spendLines =
-      doc.splitTextToSize(
-        currentWallet.spendKey,
-        75
-      );
-
-    doc.text(
-      spendLines,
+    drawCopySafePdfValue(
+      currentWallet.spendKey,
       22,
-      panelY + 77
+      panelY + 77,
+      75,
+      6.3
     );
 
 
@@ -1349,18 +1352,12 @@ async function createPdf() {
       "normal"
     );
 
-    doc.setFontSize(6.3);
-
-    const viewLines =
-      doc.splitTextToSize(
-        currentWallet.viewKey,
-        75
-      );
-
-    doc.text(
-      viewLines,
+    drawCopySafePdfValue(
+      currentWallet.viewKey,
       110,
-      panelY + 77
+      panelY + 77,
+      75,
+      6.3
     );
 
 
