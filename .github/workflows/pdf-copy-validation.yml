@@ -1,0 +1,30 @@
+name: Validate Paper Wallet PDF Copy
+
+on:
+  push:
+    branches:
+      - fix/pdf-unbroken-credentials-20261016
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  pdf-copy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install PDF extraction utility
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Install JS dependencies
+        run: npm ci
+      - name: Verify Vite production build
+        run: npm run build
+      - name: Test PDF text extraction of all four wallet fields
+        run: node --test tests/pdf-copy.test.mjs

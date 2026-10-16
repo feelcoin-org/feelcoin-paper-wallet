@@ -1,6 +1,7 @@
 import "./style.css";
 import QRCode from "qrcode";
 import { jsPDF } from "jspdf";
+import { drawCopySafePdfValue } from "./pdf-copy.js";
 
 const app = document.querySelector("#app");
 
@@ -1414,6 +1415,80 @@ async function createPdf() {
       {
         align: "right"
       }
+    );
+
+
+    /* =====================================================
+       COPY-READY PAGE (LANDSCAPE)
+       The first page remains the readable printable wallet.
+       The second page uses one PDF text operation per value,
+       so selection does not introduce wrap-created whitespace.
+       ===================================================== */
+    doc.addPage("a4", "landscape");
+    doc.setFillColor(247, 249, 252);
+    doc.rect(0, 0, 297, 210, "F");
+
+    doc.setTextColor(22, 37, 53);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.text("FEELCOIN | COPY-READY CREDENTIALS", 16, 22);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(
+      "Select and copy the value inside each row. Do not include the label.",
+      16, 31
+    );
+
+    function copyReadyRow(label, value, top, fontName, preferredSize) {
+      doc.setTextColor(102, 72, 30);
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.text(label, 16, top);
+
+      doc.setFillColor(255, 255, 255);
+      doc.setDrawColor(190, 164, 106);
+      doc.roundedRect(16, top + 5, 265, 18, 2, 2, "FD");
+
+      doc.setTextColor(20, 34, 51);
+      doc.setFont(fontName, "normal");
+      drawCopySafePdfValue(doc, value, 19, top + 16, 259, preferredSize);
+    }
+
+    copyReadyRow(
+      "PUBLIC FEELCOIN ADDRESS",
+      currentWallet.address,
+      40, "courier", 10
+    );
+    copyReadyRow(
+      "PRIVATE SPEND KEY",
+      currentWallet.spendKey,
+      78, "courier", 10
+    );
+    copyReadyRow(
+      "PRIVATE VIEW KEY",
+      currentWallet.viewKey,
+      116, "courier", 10
+    );
+    copyReadyRow(
+      "RECOVERY SEED (single spaces between words)",
+      currentWallet.seed,
+      154, "times", 10
+    );
+
+    doc.setTextColor(145, 49, 38);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(9);
+    doc.text(
+      "CONFIDENTIAL: Private keys and recovery seed grant control of this wallet. Never share this page.",
+      16, 190
+    );
+    doc.setTextColor(80, 94, 110);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.text(
+      "Page 1: readable printable paper wallet. Page 2: exact copy/paste values. For a one-page paper backup, print page 1 only.",
+      16, 201
     );
 
 
